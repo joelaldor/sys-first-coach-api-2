@@ -1,0 +1,29 @@
+firstCoachHTTPRequest:
+  protocol: HTTPS
+  host: anypoint.mulesoft.com
+  port: "443"
+  basePath: /mocking/api/v1/links/26645a13-7f84-4472-8902-77a00f8d2c8c
+  
+http200OK:
+  statusMessage: Success
+
+http400BadRequest:
+  statusMessage: Bad Request. Your browser sent a request that this server could not understand.
+  
+http401Unauthorized:
+  statusMessage: Authorization failed.
+  
+http403Forbidden:
+  statusMessage: Forbidden - You don't have permission to access the resource on this server.
+  
+http404NotFound:
+  statusMessage: The requested URL was not found on this server.
+  
+http408Timeout:
+  statusMessage: Request timeout.
+  
+http500InternalServerError:
+  statusMessage: Internal server error.
+  
+http503ServiceUnavailable:
+  statusMessage: The service is unavailable.

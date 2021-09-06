@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="sys-firstcoach-transport-provider-routes-api-subflow" doc:id="4968c143-795a-4cf3-8603-e1c18b5409f0" >
+		<logger level="INFO" doc:name="START Firstcoach Routes Request" doc:id="b0984fbf-5df9-48a0-9407-8420d8bc1813" message="Start Firstcoach Get Routes API Request | txnId: #[correlationId]" />
+		<http:request method="GET" doc:name="GET /routes" doc:id="c91f80e8-4a9b-43a6-aae6-a8238485af2a" config-ref="HTTPRequestConfig" path="/routes" />
+		<logger level="INFO" doc:name="END Firstcoach Routes Request" doc:id="060849a8-ebdb-482e-8e5d-96716433c121" message="Completed API Request | txnId: #[correlationId]" />
+	</sub-flow>
+	<sub-flow name="sys-firstcoach-transport-provider-schedules-api-subflow" doc:id="24d8e37c-a8db-401d-8aa6-58aafc74194c" >
+		<logger level="INFO" doc:name="START Firstcoach Schedules Request" doc:id="828dcf9b-1fa9-4254-8f2f-2f2544db7036" message="Start Firstcoach Get Schedules API Request | txnId: #[correlationId]" />
+		<http:request method="GET" doc:name="GET /schedules" doc:id="c13eecb3-a5fb-492a-8cd4-1e0b382e532e" config-ref="HTTPRequestConfig" path="/schedules" />
+		<logger level="INFO" doc:name="END Firstcoach Routes Request" doc:id="02680a0a-cbc5-45d9-adc8-2221c21b221a" message="Completed API Request | txnId: #[correlationId]" />
+	</sub-flow>
+</mule>

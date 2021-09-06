@@ -1,0 +1,29 @@
+firstCoachHTTPRequest:
+  protocol: HTTP
+  host: "35.82.95.183"
+  port: "8080"
+  basePath: /castlemock/mock/rest/project/1mR1ng/application/YNvGl5
+  
+http200OK:
+  statusMessage: Success
+
+http400BadRequest:
+  statusMessage: Bad Request. Your browser sent a request that this server could not understand.
+  
+http401Unauthorized:
+  statusMessage: Authorization failed.
+  
+http403Forbidden:
+  statusMessage: Forbidden - You don't have permission to access the resource on this server.
+  
+http404NotFound:
+  statusMessage: The requested URL was not found on this server.
+  
+http408Timeout:
+  statusMessage: Request timeout.
+  
+http500InternalServerError:
+  statusMessage: Internal server error.
+  
+http503ServiceUnavailable:
+  statusMessage: The service is unavailable.

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="impl-retrieve-routes-subflow" doc:id="7d7f2992-c3cf-4930-a611-1ed8098c2a83" >
+		<flow-ref doc:name="sys-firstcoach-transport-provider-routes-api-flow" doc:id="ac73f376-5a61-4b95-8a51-4b352e246c88" name="sys-firstcoach-transport-provider-routes-api-subflow" />
+		<ee:transform doc:name="Retrieve FirstCoach Routes Data" doc:id="535b680c-fda8-4b32-bf79-3f52e51d1dcb" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": attributes.statusCode,
+	"x-http-status-msg": p('http200OK.statusMessage'),
+	"x-correlation-id": correlationId,
+	"routes": payload.routes
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+	<sub-flow name="impl-retrieve-schedules-subflow" doc:id="0084f2b1-c164-4ab8-a0c9-f1ea2210729f" >
+		<flow-ref doc:name="sys-firstcoach-transport-provider-schedules-api-flow" doc:id="2992458b-4795-4647-9c56-8b2ebc24bf54" name="sys-firstcoach-transport-provider-schedules-api-subflow" />
+		<ee:transform doc:name="Retrieve FirstCoach Schedules Data" doc:id="1ed5d71f-f4c4-4b9e-ae5c-d5407a7c664b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": attributes.statusCode,
+	"x-http-status-msg": p('http200OK.statusMessage'),
+	"x-correlation-id": correlationId,
+	"schedules": payload.schedules
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>

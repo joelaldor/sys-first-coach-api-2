@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
+    <apikit:config name="APIRouterConfig" api="resource::12053c81-ccdc-493d-b114-d14959e0f2aa:sys-firstcoach-api:1.0.2:raml:zip:sys-firstcoach-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" /> 
+    <flow name="sys-firstcoach-api-main">
+        <http:listener config-ref="HTTPListenerConfig" path="/api/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:router config-ref="APIRouterConfig" />
+		<error-handler ref="global-error-handler-subflow" />
+    </flow>
+    <flow name="sys-firstcoach-api-console">
+        <http:listener config-ref="HTTPListenerConfig" path="/console/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:console config-ref="APIRouterConfig" />
+		<error-handler ref="global-error-handler-subflow" />
+    </flow>
+    <flow name="get-routes-flow">
+        <http:listener doc:name="GET /routes" doc:id="a5dce7c5-4788-463a-936c-216ad3d71311" config-ref="HTTPListenerConfig" path="/routes">
+			<http:error-response statusCode="#[vars.httpStatus]" >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<logger level="INFO" doc:name="START LOG Retrieve Routes" doc:id="7b1eb76a-c1ec-46f1-9fcf-651ab655f7c9" message="Started Retrieve Routes Flow | txnId: #[correlationId]" />
+		<flow-ref doc:name="impl-retrieve-routes-flow" doc:id="7d6aa286-da39-4f82-8116-7f0f10fda704" name="impl-retrieve-routes-subflow" />
+		<logger level="INFO" doc:name="END LOG Retrieve Routes" doc:id="db18bfd1-80be-47cf-b164-ed5c0559ea01" message="Completed Retrieve Routes Flow | txnId: #[correlationId]" />
+		<error-handler ref="global-error-handler-subflow" />
+    </flow>
+    <flow name="get-schedules-flow">
+        <http:listener doc:name="GET /schedules" doc:id="7f975a68-b020-4df7-a2ea-d6d1a08865cf" config-ref="HTTPListenerConfig" path="/schedules">
+			<http:error-response statusCode="#[vars.httpStatus]" >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<logger level="INFO" doc:name="START LOG Retrieve Schedules" doc:id="2ca66e41-e80e-4d2f-a320-199a1beba865" message="Started Retrieve Schedules Flow | txnId: #[correlationId]" />
+		<flow-ref doc:name="impl-retrieve-schedules-flow" doc:id="2df3f9c5-dd1f-4b7f-b80e-535a805e0ce7" name="impl-retrieve-schedules-subflow" />
+		<logger level="INFO" doc:name="END LOG Retrieve Schedules" doc:id="47ed73a0-2bf1-4619-9caa-cea622dbd66e" message="Completed Retrieve Routes Flow | txnId: #[correlationId]" />
+		<error-handler ref="global-error-handler-subflow" />
+    </flow>
+</mule>
