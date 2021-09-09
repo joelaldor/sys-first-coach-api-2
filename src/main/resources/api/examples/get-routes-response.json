@@ -1,0 +1,19 @@
+{
+  "x-http-status-code": 200,
+  "x-http-status-msg": "Success",
+  "x-correlation-id": "c4ea7c00-03dd-11ec-bf31-a078178a5ec7",
+  "routes": [
+    {
+      "departureLocationCode":"BEN-SG",
+      "arrivalLocationCode":"KLG-MY"
+    },
+    {
+      "departureLocationCode":"BEN-SG",
+      "arrivalLocationCode":"BU-MY"
+    },
+    {
+      "departureLocationCode":"BEN-SG",
+      "arrivalLocationCode":"TAR-MY"
+    }
+  ]
+}

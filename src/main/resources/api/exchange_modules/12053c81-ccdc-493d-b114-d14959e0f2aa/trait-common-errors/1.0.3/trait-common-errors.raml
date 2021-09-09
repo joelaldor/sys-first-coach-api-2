@@ -1,0 +1,56 @@
+#%RAML 1.0 Trait
+
+uses:
+  common-error-types: types/type-common-response-types.raml
+  400-error-type: types/type-400-response.raml
+
+responses:
+  400:
+    description: |
+      Request has malformed, missing or non-compliant URL parameters
+    body:
+      application/json:
+        type: 400-error-type.type-response
+        example: !include examples/http-status/response-400.json
+  401:
+    description: |
+      Unauthorized request
+    body:
+      application/json:
+        type: common-error-types.type-response
+        example: !include examples/http-status/response-401.json
+  403:
+    description: |
+      Forbidden request
+    body:
+      application/json:
+        type: common-error-types.type-response
+        example: !include examples/http-status/response-403.json
+  404:
+    description: |
+      Resource not found
+    body:
+      application/json:
+        type: common-error-types.type-response
+        example: !include examples/http-status/response-404.json
+  408:
+    description: |
+      Request timeout
+    body:
+      application/json:
+        type: common-error-types.type-response
+        example: !include examples/http-status/response-408.json
+  500:
+    description: |
+      Internal server error
+    body:
+      application/json:
+        type: common-error-types.type-response
+        example: !include examples/http-status/response-500.json
+  503:
+    description: |
+      Service Unavailable
+    body: 
+      application/json:
+        type: common-error-types.type-response
+        example: !include examples/http-status/response-503.json

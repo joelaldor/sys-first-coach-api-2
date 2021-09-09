@@ -15,7 +15,7 @@ output application/json
 	"x-http-status-code": attributes.statusCode,
 	"x-http-status-msg": p('http200OK.statusMessage'),
 	"x-correlation-id": correlationId,
-	"routes": payload.routes
+	"routes": payload
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>

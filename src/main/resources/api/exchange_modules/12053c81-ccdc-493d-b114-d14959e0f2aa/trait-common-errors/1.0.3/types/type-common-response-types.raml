@@ -1,0 +1,25 @@
+#%RAML 1.0 Library
+usage: Base response type for sucesss and response payloads
+
+types:
+  type-response:
+    type: object
+    properties:
+      x-http-status-code: 
+        type: number
+        description: |
+          HTTP status code
+        required: true
+        example: 200
+      x-http-status-msg:  
+        type: string
+        description: |
+          Human-readable description of HTTP error
+        required: true
+        example: "Success"
+      x-correlation-id:
+        type: string
+        description: |
+          System-generated event correlation ID
+        required: true
+        example: "XXXX"

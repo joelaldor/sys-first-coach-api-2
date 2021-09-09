@@ -1,0 +1,6 @@
+{
+  "x-http-status-code": 400,
+  "x-http-status-msg": "Bad Request. Your browser sent a request that this server could not understand.",
+  "x-correlation-id": "c4ea7c00-03dd-11ec-bf31-a078178a5ec7",
+  "x-error-source": "bad_request_string"
+}

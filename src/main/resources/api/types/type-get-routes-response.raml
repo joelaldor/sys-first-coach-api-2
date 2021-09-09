@@ -1,0 +1,16 @@
+#%RAML 1.0 Library
+
+types:
+  Routes:
+    type: object
+    properties:
+      x-http-status-code: number
+      x-http-status-msg: string
+      x-correlation-id: string
+      routes:
+        type: array
+        items:
+          type: object
+          properties:
+            departureLocationCode: string
+            arrivalLocationCode: string

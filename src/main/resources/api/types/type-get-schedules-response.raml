@@ -1,0 +1,22 @@
+#%RAML 1.0 Library
+
+types:
+  Schedules:
+    type: object
+    properties: 
+      x-http-status-code: number
+      x-http-status-msg: string
+      x-correlation-id: string
+      schedules: 
+        type: array
+        items: 
+          type: object
+          properties:
+            departureDateTime: 
+              type: string
+            fromLocation: 
+              type: string
+            toLocation: 
+              type: string
+            availableSeats: 
+              type: number

@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: sys-firstcoach-api
+description: This system API retrieves schedules and routes from the Firstcoach Transport Provider System
+
+uses: 
+  get-routes-response-type: types/type-get-routes-response.raml
+  get-schedules-response-type: types/type-get-schedules-response.raml
+
+traits:  
+  responses: !include exchange_modules/12053c81-ccdc-493d-b114-d14959e0f2aa/trait-common-errors/1.0.3/trait-common-errors.raml
+  
+/routes:
+  get:
+    is: [responses]
+    responses:
+      200:
+        body:
+          application/json:
+            type: get-routes-response-type.Routes
+            example: !include examples/get-routes-response.json
+              
+/schedules:
+  get:
+    is: [responses]
+    responses:
+      200:
+        body:
+          application/json:
+            type: get-schedules-response-type.Schedules
+            example: !include examples/get-schedules-response.json

@@ -1,0 +1,5 @@
+{
+  "x-http-status-code": 401,
+  "x-http-status-msg": "Authorization failed.",
+  "x-correlation-id": "c4ea7c00-03dd-11ec-bf31-a078178a5ec7"
+}

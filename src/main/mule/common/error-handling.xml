@@ -118,5 +118,120 @@ output application/json
 			</ee:transform>
 			<logger level="INFO" doc:name="END ERROR LOG" doc:id="5a16d717-aaa0-4a37-9de9-50772ac64141" message="Error payload is #[payload]" />
 		</on-error-propagate>
+			            <on-error-propagate type="APIKIT:NOT_FOUND">
+                <logger level="INFO" doc:name="START ERROR LOG" doc:id="ce73698d-62b7-4845-9c92-b3b479375349" message="APIKIT NOT_FOUND ERROR | #[correlationId]" />
+			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Not Found Error Response">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": 404,
+	"x-http-status-msg": p('http404NotFound.statusMessage'),
+	"x-correlation-id": correlationId
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[404]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="END ERROR LOG" doc:id="f1cfc614-db43-4338-ab82-dc181d736373" message="Error payload is #[payload]" />
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:METHOD_NOT_ALLOWED">
+                <logger level="INFO" doc:name="START ERROR LOG" doc:id="b4a7a2e9-69dd-4ce6-84f3-641b68fc2839" message="APIKIT METHOD_NOT_ALLOWED ERROR | #[correlationId]" />
+			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Method Not Allowed Error Response">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": 405,
+	"x-http-status-msg": "ERROR: Method not allowed",
+	"x-correlation-id": correlationId
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[405]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="END ERROR LOG" doc:id="2db2ec1d-a3ab-42d5-8f58-01d07966be87" message="Error payload is #[payload]" />
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_ACCEPTABLE">
+                <logger level="INFO" doc:name="START ERROR LOG" doc:id="575ceed2-943d-4635-a3a5-3047436651b6" message="APIKIT NOT_ACCEPTABLE ERROR | #[correlationId]" />
+			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Not Acceptable Error Response">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": 406,
+	"x-http-status-msg": "ERROR: Not Acceptable",
+	"x-correlation-id": correlationId
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[406]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="END ERROR LOG" doc:id="826da2d8-3e61-4398-a8cf-aeb511da5480" message="Error payload is #[payload]" />
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+                <logger level="INFO" doc:name="START ERROR LOG" doc:id="8d3c6666-6f2e-4ad5-a673-0e04aa5ae5b1" message="APIKIT UNSUPPORTED_MEDIA_TYPE ERROR | #[correlationId]" />
+			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Unsupported Media Type Error Response">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": 415,
+	"x-http-status-msg": "ERROR: Unsupported Media Type",
+	"x-correlation-id": correlationId
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[415]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="END ERROR LOG" doc:id="415077d2-845b-46af-b005-4b341b11e499" message="Error payload is #[payload]" />
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_IMPLEMENTED">
+                <logger level="INFO" doc:name="START ERROR LOG" doc:id="90a55d1f-a3ba-46a0-93e8-8e7bed5c02bc" message="APIKIT NOT_IMPLEMENTED ERROR | #[correlationId]" />
+			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Not Implemented Error Response">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": 501,
+	"x-http-status-msg": "ERROR: Not Implemented",
+	"x-correlation-id": correlationId
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[501]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="END ERROR LOG" doc:id="c40d6305-06b6-47a3-a963-acbc1eb573c6" message="Error payload is #[payload]" />
+            </on-error-propagate>
+		<on-error-propagate type="APIKIT:BAD_REQUEST">
+                <logger level="INFO" doc:name="START ERROR LOG" doc:id="7eafe1ca-f8ef-445a-8cd2-ed11c6630721" message="APIKIT BAD_REQUEST ERROR | #[correlationId]" />
+			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Bad Request Error Response">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": 400,
+	"x-http-status-msg": p('http400BadRequest.statusMessage'),
+	"x-correlation-id": correlationId,
+	"x-error-event-source": attributes.reasonPhrase
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[400]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="END ERROR LOG" doc:id="67c5d64d-f767-4791-bb1c-a10acf992240" message="Error payload is #[payload]" />
+            </on-error-propagate>	
 	</error-handler>
 </mule>
