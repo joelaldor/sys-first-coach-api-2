@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="error-handling-test-suite.xml" />
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-routekit-not-found" doc:id="e83b947d-a8cf-46ba-9522-0e5f3e152117" expectedErrorType="APIKIT:NOT_FOUND" description="Test scenario">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when APIKIT:NOT_FOUND" doc:id="e37708b1-1c32-4cb8-bbcf-d2c3471f55be" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="a9681e77-db06-4b12-9d49-cf7baac0a1ea" name="get:\routes:sys-firstcoach-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 404" doc:id="e75a09f5-eb34-41d1-a995-c9f5724a06be" actual="#[vars.httpStatus]" expected="#[404]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-routekit-not-acceptable" doc:id="af372665-a40b-4f1f-b10c-ced719fd53a8" description="Test API Routekit Not Accptable" expectedErrorType="APIKIT:NOT_ACCEPTABLE">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when APIKIT:NOT_ACCEPTABLE" doc:id="5b7efc77-e9cc-4832-8235-d17f4645fad2" processor="http:request">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+						<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+					</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="0d6ff1b3-8ad5-4406-b734-93132a1a9042" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 406" doc:id="1f3a2eef-8c69-4e2c-a740-76ba3174ae85" actual="#[vars.httpStatus]" expected="#[406]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-routekit-unsupported-media-type" doc:id="3a952680-f134-4375-b163-21c0c40ff348" description="Test API Routekit Unsupported Media Type" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when APIKIT:UNSUPPORTED_MEDIA_TYPE" doc:id="aaab48f2-58b5-41c1-85c0-664b9bbff504" processor="http:request">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+						<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+					</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="59b77c37-9a5a-427a-b069-852878ae5599" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 415" doc:id="dd70250d-b873-4a9f-b661-df5e666fa4ad" actual="#[vars.httpStatus]" expected="#[415]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-routekit-bad-request" doc:id="05d6c064-2665-4870-bb07-924175155b20" description="Test API Routekit Bad Request" expectedErrorType="APIKIT:BAD_REQUEST">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when APIKIT:BAD_REQUEST" doc:id="8cc05153-e1fc-4614-91d3-524685a026b2" processor="http:request">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+						<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+					</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="49c6fcb8-6486-4dee-bfea-94016c638440" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 400" doc:id="08592f20-e3a7-4c26-8d92-9d130296898f" actual="#[vars.httpStatus]" expected="#[400]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-routekit-method-not-allowed" doc:id="c6e33eed-edfd-430b-8f8d-0806d71c6ea9" description="Test API Routekit Bad Request" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when APIKIT:METHOD_NOT_ALLOWED" doc:id="5920b492-6d21-4c67-bd73-13f7b29ed525" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="37ee44ba-a235-43f5-a23b-c534dd5b3c24" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 405" doc:id="2ff1aa6e-38bb-4a69-9336-8ffc7c4ee390" actual="#[vars.httpStatus]" expected="#[405]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-routekit-not-implemented" doc:id="186edc04-4bcd-44e9-98a1-f2e514718608" description="Test API Routekit Bad Request" expectedErrorType="APIKIT:NOT_IMPLEMENTED">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when APIKIT:NOT_IMPLEMENTED" doc:id="b77e6875-60bf-4d5e-877b-7bb7bd6defa0" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="27fc2919-86ba-47aa-804a-80b8265f76fa" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 501" doc:id="950d409c-e8cb-4374-a137-97ac696a812c" actual="#[vars.httpStatus]" expected="#[501]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-http-bad-request" doc:id="06ee4cdf-8fd2-4607-9518-c2cbfb2c6f7f" description="Test API Routekit Bad Request" expectedErrorType="HTTP:BAD_REQUEST">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when HTTP:BAD_REQUEST" doc:id="a0ee6d8d-c4fa-4660-a244-956abf10936f" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:BAD_REQUEST" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="9f2cb0e5-8a6a-44b2-9b73-65a2c375107a" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 400" doc:id="96a3c848-c6b0-464b-92e6-2f0def122adc" actual="#[vars.httpStatus]" expected="#[400]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-http-unauthorized" doc:id="cdfda8b9-c82b-4c63-a2ec-084f3fa04cb8" description="Test API Routekit Bad Request" expectedErrorType="HTTP:UNAUTHORIZED">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when HTTP:UNAUTHORIZED" doc:id="84c9f6e1-bbc7-495c-95ca-68070774d110" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:UNAUTHORIZED" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="64c0b98a-c08d-4376-9160-1a6eb5cca8b6" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 401" doc:id="40b0e8c5-3ff6-466e-b1e7-0678a7495d47" actual="#[vars.httpStatus]" expected="#[401]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-http-forbidden" doc:id="524fa297-63b2-4e34-a296-91f539695b3a" description="Test API Routekit Bad Request" expectedErrorType="HTTP:FORBIDDEN">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when HTTP:FORBIDDEN" doc:id="93c0e816-9235-4537-b787-8bc3200d7831" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:FORBIDDEN" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="49517961-47dc-4afc-bd3f-c58d0dbbeeae" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 403" doc:id="bc9416d7-a261-44fd-8239-4554e7947ddc" actual="#[vars.httpStatus]" expected="#[403]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-http-not-found" doc:id="2260c8d6-bdab-4bc7-b1fc-a0d3c77697b1" description="Test API Routekit Bad Request" expectedErrorType="HTTP:NOT_FOUND">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when HTTP:NOT_FOUND" doc:id="4a783116-4f77-41a1-970b-0d98d1e6c6a5" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:NOT_FOUND" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="d4b59e59-256b-42b9-8d75-3c6011320a73" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 404" doc:id="b72289df-5b0f-4eff-98fa-3d3c001f7bb3" actual="#[vars.httpStatus]" expected="#[404]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-http-timeout" doc:id="4c126dd1-e34c-4aab-8d3b-31f99ea47ac5" description="Test API Routekit Bad Request" expectedErrorType="HTTP:TIMEOUT">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when HTTP:TIMEOUT" doc:id="6bf5e3c2-83aa-4904-bc8a-08b43deb719c" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:TIMEOUT" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="509a32f9-cc7b-42da-a5fe-0400848a9f3b" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 408" doc:id="0da485e1-e898-428b-bf8a-2dcacb61f94c" actual="#[vars.httpStatus]" expected="#[408]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-sys-firstcoach-api-main-http-internal-server-error" doc:id="b35f0c58-cf31-4858-9efe-8f7b6634625e" description="Test API Routekit Bad Request" expectedErrorType="HTTP:INTERNAL_SERVER_ERROR">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when HTTP:INTERNAL_SERVER_ERROR" doc:id="58da0cd0-56fc-421d-ada0-0b8915c17a82" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:INTERNAL_SERVER_ERROR" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="ab1de291-519c-4a8e-a475-dbc99508e71c" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 500" doc:id="5f4b7a14-a661-416c-ac12-b0de63f3e0b2" actual="#[vars.httpStatus]" expected="#[500]" />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="Copy_of_sys-firstcoach-api-test-suite-sys-firstcoach-api-main-http-service-unavailable" doc:id="4dadd454-576a-4a2f-8a82-4b98417fc297" description="Test API Routekit Bad Request" expectedErrorType="HTTP:SERVICE_UNAVAILABLE">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when HTTP:SERVICE_UNAVAILABLE" doc:id="47b524aa-d386-43b3-a664-bd676fdef23a" processor="http:request">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+						<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+						<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:SERVICE_UNAVAILABLE" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to sys-firstcoach-api-main" doc:id="3e41aed4-2958-4396-be8c-a2c252a9e5cd" name="get:\routes:sys-firstcoach-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert HTTP Status Code is 503" doc:id="f1d3e6f5-5cd4-4b91-8b09-4be073052ed0" actual="#[vars.httpStatus]" expected="#[503]" />
+			</munit:validation>
+		</munit:test>
+
+</mule>

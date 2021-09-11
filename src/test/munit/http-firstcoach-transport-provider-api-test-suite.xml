@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="http-firstcoach-transport-provider-api-test-suite.xml" />
+	<munit:test name="http-firstcoach-transport-provider-api-test-suite-sys-firstcoach-transport-provider-routes-api-subflowTest" doc:id="107e3cae-7784-4197-8491-a819dce83342" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when FC GET /routes resource is invoked" doc:id="649c3ba3-f525-44d3-90d7-926cc2501d66" processor="sub-flow">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="sys-firstcoach-transport-provider-routes-api-subflow" attributeName="name" />
+					<munit-tools:with-attribute whereValue="4968c143-795a-4cf3-8603-e1c18b5409f0" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[MunitTools::getResourceAsString('responses/get-routes-200-ok-response.json')]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sys-firstcoach-transport-provider-routes-api-subflow" doc:id="f718b146-e1f2-453c-ac83-688f9b05b230" name="sys-firstcoach-transport-provider-routes-api-subflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that payload is not empty and is of JSON type" doc:id="deaf23cb-ce28-400f-ad7f-1f95bf420477" is="#[MunitTools::both(MunitTools::notNullValue(), MunitTools::withMediaType('application/json'))]" expression="#[payload]"/>
+			<munit-tools:verify-call doc:name="Verify call GET /routes" doc:id="8ea94ee9-d121-4730-8e56-83fc7fb45731" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="http-firstcoach-transport-provider-api-test-suite-sys-firstcoach-transport-provider-schedules-api-subflowTest" doc:id="d051ab63-ad6f-4a5a-8b70-bbb7433475cf" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when FC GET /schedules resource is invoked" doc:id="a8390650-bf1b-425e-9bd4-843d35c4744d" processor="sub-flow">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="sys-firstcoach-transport-provider-schedules-api-subflow" attributeName="name" />
+					<munit-tools:with-attribute whereValue="24d8e37c-a8db-401d-8aa6-58aafc74194c" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[MunitTools::getResourceAsString('responses/get-schedules-200-ok-response.json')]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sys-firstcoach-transport-provider-schedules-api-subflow" doc:id="fd9d23b6-5b2a-445d-99c2-90152bf1bbb1" name="sys-firstcoach-transport-provider-schedules-api-subflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that payload is not empty and is of JSON type" doc:id="2abb3d91-2c76-46a6-aa33-2e416c55b32c" is="#[MunitTools::both(MunitTools::notNullValue(), MunitTools::withMediaType('application/json'))]" expression="#[payload]"/>
+			<munit-tools:verify-call doc:name="erify call GET /schedules" doc:id="b29e2de4-4f13-4c19-88fb-ba0187ca5353" processor="http:request" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /schedules" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c13eecb3-a5fb-492a-8cd4-1e0b382e532e" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/schedules" attributeName="path" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+</mule>

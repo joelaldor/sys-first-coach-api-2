@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="sys-firstcoach-api-test-suite.xml" />
+	<munit:test name="sys-firstcoach-api-test-suite-get:\routes:sys-firstcoach-api-configTest" doc:id="c87ef1b8-9109-41b5-b6ed-4893ab936274" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when response is 200 OK" doc:id="5b970027-6c20-4101-b396-4df2aaf407bb" processor="sub-flow">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="impl-retrieve-routes-subflow" attributeName="name" />
+					<munit-tools:with-attribute whereValue="7d7f2992-c3cf-4930-a611-1ed8098c2a83" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[MunitTools::getResourceAsString('responses/get-routes-200-ok-response.json')]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\routes:sys-firstcoach-api-config" doc:id="e4316929-b355-4a6c-aec9-56a9b7b476a8" name="get:\routes:sys-firstcoach-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that payload is OK" doc:id="50637cba-afbc-4a1c-a552-2315da290519" is="#[MunitTools::both(MunitTools::withMediaType('application/json'), MunitTools::notNullValue())]" expression="#[payload]" />
+			<munit-tools:verify-call doc:name="Verify call GET /routes" doc:id="ae8f4217-08e5-4a72-b3f3-61d8d485377e" processor="http:request" atLeast="1" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /routes" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c91f80e8-4a9b-43a6-aae6-a8238485af2a" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/routes" attributeName="path" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sys-firstcoach-api-test-suite-get:\schedules:sys-firstcoach-api-configTest" doc:id="3148a459-7ef4-4bac-9281-0c999d67517a" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when response is 200 OK" doc:id="6c825151-17dd-41cb-a171-442d1b27dd7b" processor="sub-flow">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="impl-retrieve-schedules-subflow" attributeName="name" />
+					<munit-tools:with-attribute whereValue="0084f2b1-c164-4ab8-a0c9-f1ea2210729f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[MunitTools::getResourceAsString('responses/get-schedules-200-ok-response.json')]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\schedules:sys-firstcoach-api-config" doc:id="c7a977cb-f65f-464f-bfd6-88773ca6d903" name="get:\schedules:sys-firstcoach-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that payload is OK" doc:id="37d72c2f-17b9-4fd5-8597-8e8b8c3a8864" is="#[MunitTools::both(MunitTools::withMediaType('application/json'), MunitTools::notNullValue())]" expression="#[payload]" />
+			<munit-tools:verify-call doc:name="Verify call GET /schedules" doc:id="e226f085-d68d-4d6b-83c1-8143f2673eb8" processor="http:request" atLeast="1" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="GET /schedules" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c13eecb3-a5fb-492a-8cd4-1e0b382e532e" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTPRequestConfig" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/schedules" attributeName="path" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+</mule>

@@ -7,6 +7,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<error-handler name="global-error-handler-subflow" doc:id="c4af0786-c24e-4235-955a-60c84c4947b7" >
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate: HTTP:BAD_REQUEST" doc:id="aa26cb3d-5f6d-42af-a277-e7cf2e392a03" type="HTTP:BAD_REQUEST" >
 			<logger level="INFO" doc:name="START ERROR LOG" doc:id="267078ac-a2c3-40fa-9134-76a98c2c9f7c" message="HTTP 400 ERROR | #[correlationId]" />
+			<set-variable value="400" doc:name="Set Variable" doc:id="19b8f665-3d04-490d-b5c5-4c96283e5d5f" variableName="httpStatus"/>
 			<ee:transform doc:name="400 Error Response" doc:id="8a58f162-22fe-46af-8c8d-12f3c9e75613" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
@@ -24,6 +25,7 @@ output application/json
 		</on-error-propagate>
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate: HTTP:UNAUTHORIZED" doc:id="a92522b8-0926-4da5-9f8d-5649ce2a8768" type="HTTP:UNAUTHORIZED" >
 			<logger level="INFO" doc:name="START ERROR LOG" doc:id="01d33ad4-e96b-4dd3-9236-1cb899210bfe" message="HTTP 401 ERROR | #[correlationId]" />
+			<set-variable value="401" doc:name="Set Variable" doc:id="57ef9486-d796-49d4-b93e-50ef637c288f" variableName="httpStatus"/>
 			<ee:transform doc:name="401 Error Response" doc:id="817f8005-4a28-4825-9846-2953c9185422" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
@@ -40,6 +42,7 @@ output application/json
 		</on-error-propagate>
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate: HTTP:FORBIDDEN" doc:id="8ba48b64-47d9-4ff6-85b2-ca60e274c8eb" type="HTTP:FORBIDDEN" >
 			<logger level="INFO" doc:name="START ERROR LOG" doc:id="4dc318d7-b813-42b3-988d-b37e5054852d" message="HTTP 403 ERROR | #[correlationId]" />
+			<set-variable value="403" doc:name="Set Variable" doc:id="8b522f2d-62e2-44ff-a79e-fa0dc5a75efe" variableName="httpStatus"/>
 			<ee:transform doc:name="403 Error Response" doc:id="e2f20a75-c516-4918-8a24-889785f20138" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
@@ -56,6 +59,7 @@ output application/json
 		</on-error-propagate>
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate: HTTP:NOT_FOUND" doc:id="5405db42-0587-4eb1-a7f0-7c6efd2e77a0" type="HTTP:NOT_FOUND" >
 			<logger level="INFO" doc:name="START ERROR LOG" doc:id="89bacbf9-6308-46fe-a628-8261e1bcddc6" message="HTTP 404 ERROR | #[correlationId]" />
+			<set-variable value="404" doc:name="Set Variable" doc:id="e6e2aead-3672-4965-b364-eb1b5032b615" variableName="httpStatus"/>
 			<ee:transform doc:name="404 Error Response" doc:id="8c9b11a8-5e99-4c4b-a52e-ae11ba8b7062" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
@@ -72,6 +76,7 @@ output application/json
 		</on-error-propagate>
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate: HTTP:TIMEOUT" doc:id="a4e6c083-911c-4954-83cd-f03934722d5b" type="HTTP:TIMEOUT" >
 			<logger level="INFO" doc:name="START ERROR LOG" doc:id="0af45814-1d82-42e3-b038-79adf315d896" message="HTTP 408 ERROR | #[correlationId]" />
+			<set-variable value="408" doc:name="Set Variable" doc:id="3cb468ac-edfc-461e-a923-399d8b65c398" variableName="httpStatus"/>
 			<ee:transform doc:name="408 Error Response" doc:id="e2478869-fc95-42a1-b8c4-612b58068925" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
@@ -88,6 +93,7 @@ output application/json
 		</on-error-propagate>
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate: HTTP:TIMEOUT" doc:id="020f44dd-1ea8-4f0e-8cac-eea1269a0367" type="HTTP:INTERNAL_SERVER_ERROR" >
 			<logger level="INFO" doc:name="START ERROR LOG" doc:id="c0f921c2-8c9d-4686-9598-b56b07f784dd" message="HTTP 500 ERROR | #[correlationId]" />
+			<set-variable value="500" doc:name="Set Variable" doc:id="0fa8c1dd-5e23-4a8e-96f6-ae28473e1fcf" variableName="httpStatus"/>
 			<ee:transform doc:name="500 Error Response" doc:id="2a6f6547-291e-48af-a5c4-43b2ffb93a83" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
@@ -104,6 +110,7 @@ output application/json
 		</on-error-propagate>
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate: HTTP:SERVICE_UNAVAILABLE" doc:id="f0cfaa03-06fd-46b6-a978-8bb551a54252" type="HTTP:SERVICE_UNAVAILABLE" >
 			<logger level="INFO" doc:name="START ERROR LOG" doc:id="dda75b20-c49b-4612-88aa-ce419eb27207" message="HTTP 503 ERROR | #[correlationId]" />
+			<set-variable value="503" doc:name="Set Variable" doc:id="e19165b7-3536-4b97-8234-207289bfc915" variableName="httpStatus"/>
 			<ee:transform doc:name="503 Error Response" doc:id="96ad2ca1-8ff8-4c12-ad0b-bd2ad30c8700" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
@@ -120,6 +127,7 @@ output application/json
 		</on-error-propagate>
 			            <on-error-propagate type="APIKIT:NOT_FOUND">
                 <logger level="INFO" doc:name="START ERROR LOG" doc:id="ce73698d-62b7-4845-9c92-b3b479375349" message="APIKIT NOT_FOUND ERROR | #[correlationId]" />
+			<set-variable value="404" doc:name="Set Variable" doc:id="a94ec2c8-3633-4bf4-b457-aa04425227a2" variableName="httpStatus"/>
 			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Not Found Error Response">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0
@@ -139,6 +147,7 @@ output application/json
             </on-error-propagate>
             <on-error-propagate type="APIKIT:METHOD_NOT_ALLOWED">
                 <logger level="INFO" doc:name="START ERROR LOG" doc:id="b4a7a2e9-69dd-4ce6-84f3-641b68fc2839" message="APIKIT METHOD_NOT_ALLOWED ERROR | #[correlationId]" />
+			<set-variable value="405" doc:name="Set Variable" doc:id="d334643f-31dd-45f4-9ea1-efc21b85b2c7" variableName="httpStatus"/>
 			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Method Not Allowed Error Response">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0
@@ -158,6 +167,7 @@ output application/json
             </on-error-propagate>
             <on-error-propagate type="APIKIT:NOT_ACCEPTABLE">
                 <logger level="INFO" doc:name="START ERROR LOG" doc:id="575ceed2-943d-4635-a3a5-3047436651b6" message="APIKIT NOT_ACCEPTABLE ERROR | #[correlationId]" />
+			<set-variable value="406" doc:name="Set Variable" doc:id="603e3847-2a17-4559-83c5-50276a874682" variableName="httpStatus"/>
 			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Not Acceptable Error Response">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0
@@ -177,6 +187,7 @@ output application/json
             </on-error-propagate>
             <on-error-propagate type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
                 <logger level="INFO" doc:name="START ERROR LOG" doc:id="8d3c6666-6f2e-4ad5-a673-0e04aa5ae5b1" message="APIKIT UNSUPPORTED_MEDIA_TYPE ERROR | #[correlationId]" />
+			<set-variable value="415" doc:name="Set Variable" doc:id="355bb22f-1f45-4c7f-ac76-96a47ddd1a47" variableName="httpStatus"/>
 			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Unsupported Media Type Error Response">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0
@@ -196,6 +207,7 @@ output application/json
             </on-error-propagate>
             <on-error-propagate type="APIKIT:NOT_IMPLEMENTED">
                 <logger level="INFO" doc:name="START ERROR LOG" doc:id="90a55d1f-a3ba-46a0-93e8-8e7bed5c02bc" message="APIKIT NOT_IMPLEMENTED ERROR | #[correlationId]" />
+			<set-variable value="501" doc:name="Set Variable" doc:id="f57617aa-c458-459c-9c31-f8907138fd32" variableName="httpStatus"/>
 			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Not Implemented Error Response">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0
@@ -215,6 +227,7 @@ output application/json
             </on-error-propagate>
 		<on-error-propagate type="APIKIT:BAD_REQUEST">
                 <logger level="INFO" doc:name="START ERROR LOG" doc:id="7eafe1ca-f8ef-445a-8cd2-ed11c6630721" message="APIKIT BAD_REQUEST ERROR | #[correlationId]" />
+			<set-variable value="400" doc:name="Set Variable" doc:id="f902b76b-9a2e-4e91-a6f3-7abdd8a111fd" variableName="httpStatus"/>
 			<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:name="APIKIT Bad Request Error Response">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0

@@ -1,0 +1,6 @@
+{
+	"x-http-status-code": 400,
+	"x-http-status-msg": "ERROR: Bad Request",
+	"x-correlation-id": "correlationId",
+	"x-error-event-source": "string"
+}

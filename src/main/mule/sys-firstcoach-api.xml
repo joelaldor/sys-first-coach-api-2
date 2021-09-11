@@ -12,7 +12,7 @@
             </http:error-response>
         </http:listener>
         <apikit:router config-ref="sys-firstcoach-api-config" />
-		<error-handler ref="global-error-handler-subflow" />
+		<error-handler />
     </flow>
     <flow name="sys-firstcoach-api-console">
         <http:listener config-ref="HTTPListenerConfig" path="/console/*">

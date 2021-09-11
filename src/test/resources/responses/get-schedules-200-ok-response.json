@@ -1,0 +1,19 @@
+{
+  "x-http-status-code": 200,
+  "x-http-status-msg": "Success",
+  "x-correlation-id": "c3e8773d-e745-458f-9145-b15c05ddb63d",
+  "schedules": [
+    {
+      "departureDateTime": "2019-04-30T16:41:41.090Z",
+      "fromLocation": "BEN-SG",
+      "toLocation": "KLG-MY",
+      "availableSeats": 50
+    }, 
+    {
+      "departureDateTime": "2019-04-30T18:41:41.090Z",
+      "fromLocation": "BEN-SG",
+      "toLocation": "KLG-MY",
+      "availableSeats": 10
+    }
+  ]
+}
