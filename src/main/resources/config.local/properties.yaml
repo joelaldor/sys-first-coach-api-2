@@ -1,8 +1,8 @@
 firstCoachHTTPRequest:
-  protocol: HTTPS
-  host: anypoint.mulesoft.com
-  port: "443"
-  basePath: /mocking/api/v1/links/26645a13-7f84-4472-8902-77a00f8d2c8c
+  protocol: HTTP
+  host: joelaldor.mockable.io
+  port: "80"
+  basePath: /api
   
 http200OK:
   statusMessage: Success

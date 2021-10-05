@@ -14,10 +14,10 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 output application/json
 ---
 {
-	"x-http-status-code": attributes.statusCode,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http400BadRequest.statusMessage'),
 	"x-correlation-id": correlationId,
-	"x-error-event-source": attributes.reasonMessage
+	"x-error-event-source": attributes.queryString
 }]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
@@ -32,7 +32,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": attributes.statusCode,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http400BadRequest.statusMessage'),
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -49,7 +49,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": attributes.statusCode,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http403Forbidden.statusMessage'),
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -66,7 +66,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": attributes.statusCode,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http404NotFound.statusMessage'),
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -83,7 +83,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": attributes.statusCode,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http408Timeout.statusMessage'),
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -100,7 +100,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": attributes.statusCode,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http500InternalServerError.statusMessage'),
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -117,7 +117,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": attributes.statusCode,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http503ServiceUnavailable.statusMessage'),
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -134,7 +134,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": 404,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http404NotFound.statusMessage'),
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -154,7 +154,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": 405,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": "ERROR: Method not allowed",
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -174,7 +174,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": 406,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": "ERROR: Not Acceptable",
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -194,7 +194,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": 415,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": "ERROR: Unsupported Media Type",
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -214,7 +214,7 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": 501,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": "ERROR: Not Implemented",
 	"x-correlation-id": correlationId
 }]]></ee:set-payload>
@@ -234,10 +234,10 @@ output application/json
 output application/json
 ---
 {
-	"x-http-status-code": 400,
+	"x-http-status-code": vars.httpStatus as Number,
 	"x-http-status-msg": p('http400BadRequest.statusMessage'),
 	"x-correlation-id": correlationId,
-	"x-error-event-source": attributes.reasonPhrase
+	"x-error-event-source": attributes.queryString
 }]]></ee:set-payload>
                     </ee:message>
                     <ee:variables>
@@ -245,6 +245,26 @@ output application/json
                     </ee:variables>
                 </ee:transform>
 			<logger level="INFO" doc:name="END ERROR LOG" doc:id="67c5d64d-f767-4791-bb1c-a10acf992240" message="Error payload is #[payload]" />
-            </on-error-propagate>	
+            </on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="06d6a0c1-7825-441a-b30f-316d746a15ae" type="ANY" >
+			<logger level="INFO" doc:name="START ERROR LOG" doc:id="3988a3e3-206e-48d7-871b-6b537bfbb008" message="ANY: INTERNAL SERVER ERROR | #[correlationId]" />
+			<set-variable value="500" doc:name="Set Variable" doc:id="d488e058-5f26-454a-a606-32d32fb8089d" variableName="httpStatus" />
+			<ee:transform doc:name="500 Error Response" doc:id="9c617fbc-0ed8-4f02-bb8f-3630df8be649" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"x-http-status-code": vars.httpStatus as Number,
+	"x-http-status-msg": p('http500InternalServerError.statusMessage'),
+	"x-correlation-id": correlationId,
+}]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[400]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<logger level="INFO" doc:name="END ERROR LOG" doc:id="e5a1de20-e1f5-41ec-b82c-6439d7497600" message="Error payload is #[payload]" />
+		</on-error-propagate>	
 	</error-handler>
 </mule>

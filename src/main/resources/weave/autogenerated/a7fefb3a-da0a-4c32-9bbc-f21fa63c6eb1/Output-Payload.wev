@@ -1,0 +1,10 @@
+%dw 2.0
+
+type auto_a7fefb3a_da0a_4c32_9bbc_f21fa63c6eb1_Output_Payload = {
+  "x-http-status-msg": String, 
+  schedules: Array<{    availableSeats: Number,     departureDateTime: String,     fromLocation: String,     toLocation: String,     _?: Any  }>, 
+  "x-http-status-code": Number, 
+  "x-correlation-id": String, 
+  _?: Any
+}
+

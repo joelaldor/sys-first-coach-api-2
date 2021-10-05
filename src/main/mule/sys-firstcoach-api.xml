@@ -12,10 +12,10 @@
             </http:error-response>
         </http:listener>
         <apikit:router config-ref="sys-firstcoach-api-config" />
-		<error-handler />
+		<error-handler ref="global-error-handler-subflow"/>
     </flow>
-    <flow name="sys-firstcoach-api-console">
-        <http:listener config-ref="HTTPListenerConfig" path="/console/*">
+<!--     <flow name="sys-firstcoach-api-console"> -->
+<!--         <http:listener config-ref="HTTPListenerConfig" path="/console/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -26,16 +26,16 @@
         </http:listener>
         <apikit:console config-ref="sys-firstcoach-api-config" />
 		<error-handler ref="global-error-handler-subflow" />
-    </flow>
+    </flow> -->
     <flow name="get:\routes:sys-firstcoach-api-config">
 		<logger level="INFO" doc:name="START LOG Retrieve Routes" doc:id="c9b1fa59-2a32-445d-a7a7-27566aea86b2" message="Started Retrieve Routes Flow | txnId: #[correlationId]" />
-		<flow-ref doc:name="impl-retrieve-routes-flow" doc:id="74abc82d-9823-4bde-92aa-447663276fa8" name="impl-retrieve-routes-subflow" />
+		<flow-ref doc:name="impl-retrieve-routes-subflow" doc:id="74abc82d-9823-4bde-92aa-447663276fa8" name="impl-retrieve-routes-subflow" />
 		<logger level="INFO" doc:name="END LOG Retrieve Routes" doc:id="c99cb276-ea8b-4d27-ad72-35f8614f0a25" message="Completed Retrieve Routes Flow | txnId: #[correlationId]" />
 		<error-handler ref="global-error-handler-subflow" />
     </flow>
-    <flow name="get:\schedules:sys-firstcoach-api-config">
+	<flow name="get:\schedules:sys-firstcoach-api-config">
 		<logger level="INFO" doc:name="START LOG Retrieve Schedules" doc:id="9df923b3-9bfd-4bd6-934a-d73530f4fd1d" message="Started Retrieve Schedules Flow | txnId: #[correlationId]" />
-		<flow-ref doc:name="impl-retrieve-schedules-flow" doc:id="49915ba9-ac46-44c3-9c0d-a3d36712b0d1" name="impl-retrieve-schedules-subflow" />
+		<flow-ref doc:name="impl-retrieve-schedules-subflow" doc:id="49915ba9-ac46-44c3-9c0d-a3d36712b0d1" name="impl-retrieve-schedules-subflow" />
 		<logger level="INFO" doc:name="END LOG Retrieve Schedules" doc:id="dff0a7a8-5159-4f1f-8662-36646e5e3b8f" message="Completed Retrieve Routes Flow | txnId: #[correlationId]" />
 		<error-handler ref="global-error-handler-subflow" />
     </flow>

@@ -4,11 +4,12 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<sub-flow name="impl-retrieve-routes-subflow" doc:id="7d7f2992-c3cf-4930-a611-1ed8098c2a83" >
+	<sub-flow name="impl-retrieve-routes-subflow" doc:id="7f85bce8-b96a-47d3-befb-f4179a07619d" >
+		<logger level="INFO" doc:name="START LOG - Retrieving Firstcoach routes" doc:id="f0c21f32-7166-4c3f-86f9-6dcfe576ebfa" message="Start retrieving routes | txnId: #[correlationId]" />
 		<flow-ref doc:name="sys-firstcoach-transport-provider-routes-api-flow" doc:id="ac73f376-5a61-4b95-8a51-4b352e246c88" name="sys-firstcoach-transport-provider-routes-api-subflow" />
-		<ee:transform doc:name="Retrieve FirstCoach Routes Data" doc:id="535b680c-fda8-4b32-bf79-3f52e51d1dcb" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
+		<ee:transform doc:name="Retrieve FirstCoach Routes Data" doc:id="535b680c-fda8-4b32-bf79-3f52e51d1dcb">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
@@ -19,12 +20,14 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="END LOG - Retrieving Firstcoach routes" doc:id="c9e1b2c2-e130-4e81-8536-f50a0ea78822" message="Completed retrieving routes | txnId: #[correlationId]" />
 	</sub-flow>
-	<sub-flow name="impl-retrieve-schedules-subflow" doc:id="0084f2b1-c164-4ab8-a0c9-f1ea2210729f" >
+	<sub-flow name="impl-retrieve-schedules-subflow" doc:id="a7fefb3a-da0a-4c32-9bbc-f21fa63c6eb1" >
+		<logger level="INFO" doc:name="START LOG - Retrieving Firstcoach schedules" doc:id="1a3efd14-2a44-4349-9d5d-37674bba3b76" message="Start retrieving schedules | txnId: #[correlationId]" />
 		<flow-ref doc:name="sys-firstcoach-transport-provider-schedules-api-flow" doc:id="2992458b-4795-4647-9c56-8b2ebc24bf54" name="sys-firstcoach-transport-provider-schedules-api-subflow" />
-		<ee:transform doc:name="Retrieve FirstCoach Schedules Data" doc:id="1ed5d71f-f4c4-4b9e-ae5c-d5407a7c664b" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
+		<ee:transform doc:name="Retrieve FirstCoach Schedules Data" doc:id="1ed5d71f-f4c4-4b9e-ae5c-d5407a7c664b">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
@@ -35,5 +38,6 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="END LOG - Retrieving Firstcoach schedules" doc:id="62c56396-1765-4daf-b707-5af47a7e8a26" message="Completed retrieving schedules | txnId: #[correlationId]" />
 	</sub-flow>
 </mule>

@@ -14,11 +14,11 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
 	<http:listener-config name="HTTPListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" />
     </http:listener-config>
-	<http:request-config name="HTTPRequestConfig" doc:name="HTTP Request configuration" doc:id="ce8fe4c0-bee1-4b33-ac4f-f866c144e516" basePath="#[p('firstCoachHTTPRequest.basePath')]">
-		<http:request-connection protocol="${firstCoachHTTPRequest.protocol}" host="#[p('firstCoachHTTPRequest.host')]" port="#[p('firstCoachHTTPRequest.port')]" />
+	<http:request-config name="HTTPRequestConfig" doc:name="HTTP Request configuration" doc:id="ce8fe4c0-bee1-4b33-ac4f-f866c144e516" basePath="${firstCoachHTTPRequest.basePath}">
+		<http:request-connection host="${firstCoachHTTPRequest.host}" port="${firstCoachHTTPRequest.port}" protocol="${firstCoachHTTPRequest.protocol}"/>
 	</http:request-config>
 	<global-property doc:name="Global Property" doc:id="c3fcec65-8030-4848-b455-acd1beed0e24" name="mule.env" value="dev" />
 	<configuration-properties doc:name="Configuration properties" doc:id="ee94edae-7fb1-4793-a111-32a61e591b87" file="config.${mule.env}/properties.yaml" />
-	<api-gateway:autodiscovery apiId="17241504" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="80db2e41-75cf-47be-ab89-26dec4af9633" flowRef="sys-firstcoach-api-main" />
+	<api-gateway:autodiscovery apiId="17241504" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="04625654-3b36-410e-bef3-66372193aa26" flowRef="sys-firstcoach-api-main" />
 	
 	</mule>
